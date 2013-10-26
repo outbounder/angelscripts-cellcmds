@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "organic": "0.1.1",
-    "shelljs": "0.2.6"
+    "underscore": "1.5.2"
   },
   "devDependencies": {
     "jasmine-node": "latest"

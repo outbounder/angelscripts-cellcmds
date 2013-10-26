@@ -4,9 +4,8 @@ module.exports = function(c, next){
     "git clone "+c.cell.source+" "+c.cell.cwd,
     "cd "+c.cell.cwd,
     "git checkout "+c.cell.branch,
-    c.cell.nvmSource || ". ~/.nvm/nvm.sh",
-    c.cell.nodeVersion || "nvm use "+process.version,
+    c.cell.useNode || "",
     "npm install --production"
   ])
-  next && next()
+  next && next(c)
 }

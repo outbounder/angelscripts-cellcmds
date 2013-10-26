@@ -1,0 +1,9 @@
+{
+  "test": {
+    "commandsWrapper": "ssh test",
+    "startCmd": "node app-start.js",
+    "stopCmd": "node app-stop.js",
+    "restartCmd": "node app-stop.js && node app-start.js",
+    "statusCmd": "ps aux | grep node app-start.js"
+  }
+}
