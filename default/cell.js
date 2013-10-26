@@ -5,7 +5,6 @@ var angel_tissue = function(cell, action) {
   return "node node_modules/organic-angel/bin/angel.js Tissue"
     +" -action "+action
     +" -target "+cell.main
-    +(cell.native?" -native true":"")
 }
 
 module.exports = function(c, next){

@@ -13,18 +13,16 @@ All of the commands are using the generic data structure loaded by `cell` comman
       "source": "https://github.com/...",
       "branch": "staging",
       "useNode": ". ~/.nvm/nvm.sh; nvm use v1.0.0",
-      "native": true,
-      "startCmd": "node node_modules/organic-angel/bin/angel.js -action start -target app.js -native true",
-      "stopCmd": "node node_modules/organic-angel/bin/angel.js -action stop -target app.js -native true",
-      "restartCmd": "node node_modules/organic-angel/bin/angel.js -action restart -target app.js -native true",
-      "statusCmd": "node node_modules/organic-angel/bin/angel.js -action status -target app.js -native true",
+      "startCmd": "node node_modules/organic-angel/bin/angel.js Tissue -action start -target app.js",
+      "stopCmd": "node node_modules/organic-angel/bin/angel.js Tissue -action stop -target app.js",
+      "restartCmd": "node node_modules/organic-angel/bin/angel.js Tissue -action restart -target app.js",
+      "statusCmd": "node node_modules/organic-angel/bin/angel.js Tissue -action status -target app.js",
     }
 
 Notes:
 
 * `useNode: ""` disables `nvm` source
-* `startCmd`, `stopCmd`, `restartCmd`, `statusCmd` are optional, if not set will be computed using `organic-angel` taking into account `main` and `native` properties
-* `native` flag is active when using organic-angel to switch spawning of non-organic nodejs applications. see [organic-tissue](http://github.com/outbounder/organic-tissue/) 
+* `startCmd`, `stopCmd`, `restartCmd`, `statusCmd` are optional, if not set will be computed using `organic-angel` taking into account `main` property.
 
 ## using
 
