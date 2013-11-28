@@ -2,7 +2,7 @@
   "remote": "node@176.58.101.229",
   "cwd": "~/test_app",
   "main": "app.js",
-  "source": "git@github.com:outbounder/organic-angel-testrepo.git",
+  "source": "git@github.com:outbounder/angelscripts-cellcmds-testrepo.git",
   "branch": "master",
   "nvmPath": "~/.nvm/nvm.sh",
   "nodeVersion": "v0.10.18",
