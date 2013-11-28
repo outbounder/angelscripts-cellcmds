@@ -11,7 +11,7 @@ module.exports = function(angel){
         "git fetch",
         "git checkout #{branch}",
         "git pull #{origin} #{branch}",
-        "npm install --production"
+        "cd {cwd}; . {nvmPath}; nvm use {nodeVersion}; npm install --production"
       ]
       var run = series([
         data.remote? ssh("remote", commands) : exec(commands),

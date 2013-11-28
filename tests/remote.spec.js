@@ -42,6 +42,13 @@ describe("cellcmds", function(){
       })
     })
 
+    it("upgrades", function(next){
+      instance.do("cell ./cell_remote.json upgrade", function(err, result){
+        expect(err).toBeFalsy()
+        next()
+      })
+    })
+
     it("stops", function(next){
       instance.do("cell ./cell_remote.json stop", function(err, result){
         expect(err).toBeFalsy()
