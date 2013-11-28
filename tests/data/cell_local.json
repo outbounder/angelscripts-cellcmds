@@ -1,0 +1,12 @@
+{
+  "cwd": "~/test_app",
+  "main": "app.js",
+  "source": "git@github.com:outbounder/organic-angel-testrepo.git",
+  "branch": "master",
+  "nvmPath": "~/.nvm/nvm.sh",
+  "nodeVersion": "v0.10.18",
+  "start": "angel app start app.js",
+  "stop": "angel app stop app.js",
+  "restart": "angel app restart app.js",
+  "status": "angel app status app.js"
+}

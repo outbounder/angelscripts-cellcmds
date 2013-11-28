@@ -7,66 +7,41 @@ Collection of default commands for remote cell/process management.
 All of the commands are using the generic data structure loaded by `cell` command per `name`, shown bellow with computed defaults:
 
     "name": {
-      "commandsWrapper": "ssh user@server",
-      "cwd": "~/demo",
-      "main": "app.js",
-      "source": "https://github.com/...",
-      "branch": "staging",
-      "useNode": ". ~/.nvm/nvm.sh; nvm use v1.0.0",
-      "startCmd": "node node_modules/organic-angel/bin/angel.js Tissue -action start -target app.js",
-      "stopCmd": "node node_modules/organic-angel/bin/angel.js Tissue -action stop -target app.js",
-      "restartCmd": "node node_modules/organic-angel/bin/angel.js Tissue -action restart -target app.js",
-      "statusCmd": "node node_modules/organic-angel/bin/angel.js Tissue -action status -target app.js",
+      "cwd": "~/myapp",
+      "target": "app.js",
+      "source": "git://",
+      "branch": "master",
+      "nodeSource": "source ~/.nvm/nvm.sh; nvm use v0.11.0",
+      "nodeVersion": "v0.11.0",
+      "remote": "user@server",
+      "start": "",
+      "restart": "",
+      "stop": "",
+      "status": ""
     }
 
 Notes:
 
-* `useNode: ""` disables `nvm` source
-* `startCmd`, `stopCmd`, `restartCmd`, `statusCmd` are optional, if not set will be computed using `organic-angel` taking into account `main` property.
+* `nodeSource: ""` disables `nvm` source
 
-## using
+## Available commands
 
-1. create file `dna/cell.json` in root of your project with contents like:
+### `cell [name] (start|stop|restart|status)`
 
-        {
-          "myapp": {
-            "commandsWrapper": "ssh user@server",
-            "cwd": "~/demo",
-            "main": "app.js",
-            "source": "https://github.com/...",
-            "branch": "master",
-            "useNode": ". ~/.nvm/nvm.sh; nvm use v1.0.0"
-          },
-          ....
-        }
+does the action by cell name on the remote
 
-2. include in package.json
+### `cell [name] install`
 
-        {
-          "devDependencies": {
-            "organic-shellreactor-cellcmds": "0.0.1",
-            "organic-angel": "0.2.0"
-          }
-        }
+executes install instructions by cell name on the remote
 
-3. create file for execution
+### `cell [name] upgrade`
 
-        // release.js
-        var exec = require("child_process").exec
-        var cell = require("organic-shellreactor-cellcmds/default/cell")
-        var upgrade = require("organic-shellreactor-cellcmds/default/upgrade")
-        cell({ commands: [], value: ["myapp"] }, function(c){
-          upgrade(c, function(c){
-            if(c.commandsWrapper)
-              exec(c.commandWrapper+" '"+c.commands.join(" && ")+"'")
-            else
-              exec(c.commands.join(" && "))
-          })
-        })
+executes upgrade instructions by cell name on the remote
 
-# For more information about the concepts see
+## pre-requirements
 
-* [node-organic](http://github.com/varnalab/node-organic/docs/),
-* [organic-tissue](http://github.com/outbounder/organic-tissue),
-* [organic-shellreactor](http://github.com/outbounder/organic-shellreactor)
-* [organic-angel](http://github.com/outbounder/organic-angel)
+* git
+* ssh
+* nvm*
+* npm*
+* organic-angel*

@@ -1,10 +1,3 @@
-var _ = require("underscore")
-module.exports = function(plasma, config) {
-  var organelles = ["cell", "install", "remove", "restart", "start", "status", "stop", "upgrade"]
-  if(config && config.exclude)
-    organelles = _.difference(organelles, config.exclude)
-  organelles.forEach(function(name){
-    var reaction = require("./default/"+name)
-    plasma.on(name, reaction)
-  })
+module.exports = function(angel, next) {
+  angel.loadScripts(__dirname, "src", next)
 }
