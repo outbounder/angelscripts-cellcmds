@@ -26,7 +26,9 @@ its process management locally or remote.
 
 <br />
 
-    $ angel cell :mode install
+#### cell install
+
+    $ angel cell install :mode
       -> mkdir -p {cwd}
       -> cd {cwd}
       -> git clone {source} ./
@@ -34,24 +36,29 @@ its process management locally or remote.
       -> cd {cwd}; . {nvmPath}; nvm use {nodeVersion}; npm install --production
 <br />
 
+#### cell start/stop/status/restart
+
     $ angel cell :mode :cmd(start|stop|status|restart)
       -> cd {cwd}; . {nvmPath}; nvm use {nodeVersion}; {:cmd}
 
-* `:cmd` is the property from configuration.json
+* `{:cmd}` has the value of configuration[start|stop|status|restart]
 
 <br />
 
-    $ angel cell :mode upgrade
+#### cell upgrade
+
+    $ angel cell upgrade :mode
       -> cd {cwd}
       -> git fetch
       -> git checkout {branch}
       -> git pull {origin} {branch}
       -> cd {cwd}; . {nvmPath}; nvm use {nodeVersion}; npm install --production
-      -> angel cell :mode restart
+      -> angel cell restart :mode
 <br />
 
+#### cell uninstall
 
-    $ angel cell :mode uninstall
+    $ angel cell uninstall :mode
       -> rm -rf {cwd}
 <br />
 
