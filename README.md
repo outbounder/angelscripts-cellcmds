@@ -61,3 +61,17 @@ its process management locally or remote.
 * ssh
 * nvm*
 * npm*
+
+# Thanks to
+
+## organic-angel
+https://github.com/outbounder/organic-angel
+
+## shellreactions-exec
+https://github.com/outbounder/shellreactions-exec
+
+## reactions
+https://github.com/vbogdanov/reactions
+
+## jasmine-node
+https://github.com/mhevery/jasmine-node
