@@ -7,10 +7,10 @@ module.exports = function(angel){
   angel.on("cell :mode upgrade", function(options, next){
     cell.loadFileAsJSON(options.mode, function(err, data){
       var commands = [
-        "cd #{cwd}",
+        "cd {cwd}",
         "git fetch",
-        "git checkout #{branch}",
-        "git pull #{origin} #{branch}",
+        "git checkout {branch}",
+        "git pull {origin} {branch}",
         "cd {cwd}; . {nvmPath}; nvm use {nodeVersion}; npm install --production"
       ]
       var run = series([

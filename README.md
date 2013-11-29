@@ -1,42 +1,59 @@
-# shellreactor cell commands
+# angelscripts cellcmds
 
-Collection of default commands for remote cell/process management.
+## cell
+Treat any application as cell and provide support for 
+its process management locally or remote.
 
-## configuration source `/dna/cell.json`
+### configuration.json
 
-All of the commands are using the generic data structure loaded by `cell` command per `name`, shown bellow with computed defaults:
-
-    "name": {
-      "cwd": "~/myapp",
-      "target": "app.js",
-      "source": "git://",
-      "branch": "master",
-      "nodeSource": "source ~/.nvm/nvm.sh; nvm use v0.11.0",
-      "nodeVersion": "v0.11.0",
-      "remote": "user@server",
-      "start": "",
-      "restart": "",
-      "stop": "",
-      "status": ""
+    {
+      "remote": String // optional
+      "cwd": String,
+      "source": String,
+      "branch": String,
+      "nvmPath": String,
+      "nodeVersion": "v0.x.x",
+      "start": String,
+      "stop": String,
+      "restart": String,
+      "status": String
     }
 
-Notes:
+### actions
 
-* `nodeSource: ""` disables `nvm` source
+* All actions are executed on `remote` via `ssh` when it is present, otherwise locally.
+* `:mode` is the path to configuration.json which is loaded to seed the commands.
 
-## Available commands
+<br />
 
-### `cell [name] (start|stop|restart|status)`
+    $ angel cell :mode install
+      -> mkdir -p {cwd}
+      -> cd {cwd}
+      -> git clone {source} ./
+      -> git checkout {branch}
+      -> cd {cwd}; . {nvmPath}; nvm use {nodeVersion}; npm install --production
+<br />
 
-does the action by cell name on the remote
+    $ angel cell :mode :cmd(start|stop|status|restart)
+      -> cd {cwd}; . {nvmPath}; nvm use {nodeVersion}; {:cmd}
 
-### `cell [name] install`
+* `:cmd` is the property from configuration.json
 
-executes install instructions by cell name on the remote
+<br />
 
-### `cell [name] upgrade`
+    $ angel cell :mode upgrade
+      -> cd {cwd}
+      -> git fetch
+      -> git checkout {branch}
+      -> git pull {origin} {branch}
+      -> cd {cwd}; . {nvmPath}; nvm use {nodeVersion}; npm install --production
+      -> angel cell :mode restart
+<br />
 
-executes upgrade instructions by cell name on the remote
+
+    $ angel cell :mode uninstall
+      -> rm -rf {cwd}
+<br />
 
 ## pre-requirements
 
@@ -44,4 +61,3 @@ executes upgrade instructions by cell name on the remote
 * ssh
 * nvm*
 * npm*
-* organic-angel*
