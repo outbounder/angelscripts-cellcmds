@@ -4,7 +4,7 @@ var cell = require("./cell")
 var series = require("reactions").make.collectSeries
 
 module.exports = function(angel){
-  angel.on("cell :mode upgrade", function(options, next){
+  angel.on("cell upgrade :mode", function(options, next){
     cell.loadFileAsJSON(options.mode, function(err, data){
       var commands = [
         "cd {cwd}",
@@ -15,7 +15,7 @@ module.exports = function(angel){
       ]
       var run = series([
         data.remote? ssh("remote", commands) : exec(commands),
-        angel.react("cell "+options.mode+" restart")
+        angel.react("cell restart "+options.mode)
       ])
       run({cmdData: data}, next)
     })

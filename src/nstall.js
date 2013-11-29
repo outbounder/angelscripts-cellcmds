@@ -3,7 +3,7 @@ var exec = require("shellreactions-exec").exec
 var cell = require("./cell")
 
 module.exports = function(angel){
-  angel.on("cell :mode install", function(options, next){
+  angel.on("cell install :mode", function(options, next){
     cell.loadFileAsJSON(options.mode, function(err, data){
       if(err) return next(err)
       var commands = [
@@ -20,7 +20,7 @@ module.exports = function(angel){
     })
   })
 
-  angel.on("cell :mode uninstall", function(options, next){
+  angel.on("cell uninstall :mode", function(options, next){
     cell.loadFileAsJSON(options.mode, function(err, data){
       if(err) return next(err)
       var commands = "rm -rf {cwd}"

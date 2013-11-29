@@ -4,7 +4,7 @@ var ssh = require("shellreactions-exec").ssh_exec
 var exec = require("shellreactions-exec").exec
 
 module.exports = function(angel){
-  angel.on("cell :mode :cmd(start|stop|restart|status)", function(options, next){
+  angel.on("cell :cmd(start|stop|restart|status) :mode", function(options, next){
     module.exports.loadFileAsJSON(options.mode, function(err, data){
       if(err) return next(err)
       var commands = "cd {cwd}; . {nvmPath}; nvm use {nodeVersion}; {"+options.cmd+"}"

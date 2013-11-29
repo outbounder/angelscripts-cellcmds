@@ -14,21 +14,21 @@ describe("cellcmds", function(){
 
   describe("remote cells", function(){
     it("installs", function(next){
-      instance.do("cell ./cell_remote.json install", function(err, result){
+      instance.do("cell install ./cell_remote.json", function(err, result){
         expect(err).toBeFalsy()
         next()
       })
     })
 
     it("starts", function(next){
-      instance.do("cell ./cell_remote.json start", function(err, result){
+      instance.do("cell start ./cell_remote.json", function(err, result){
         expect(err).toBeFalsy()
         next()
       })
     })
 
     it("status as running", function(next){
-      instance.do("cell ./cell_remote.json status", function(err, result){
+      instance.do("cell status ./cell_remote.json", function(err, result){
         expect(err).toBeFalsy()
         expect(result).toContain("running")
         next()
@@ -36,28 +36,28 @@ describe("cellcmds", function(){
     })
 
     it("restarts", function(next){
-      instance.do("cell ./cell_remote.json restart", function(err, result){
+      instance.do("cell restart ./cell_remote.json", function(err, result){
         expect(err).toBeFalsy()
         next()
       })
     })
 
     it("upgrades", function(next){
-      instance.do("cell ./cell_remote.json upgrade", function(err, result){
+      instance.do("cell upgrade ./cell_remote.json", function(err, result){
         expect(err).toBeFalsy()
         next()
       })
     })
 
     it("stops", function(next){
-      instance.do("cell ./cell_remote.json stop", function(err, result){
+      instance.do("cell stop ./cell_remote.json", function(err, result){
         expect(err).toBeFalsy()
         next()
       })
     })
 
     it("uninstalls", function(next){
-      instance.do("cell ./cell_remote.json uninstall", function(err, result){
+      instance.do("cell uninstall ./cell_remote.json", function(err, result){
         expect(err).toBeFalsy()
         next()
       })
