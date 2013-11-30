@@ -1,11 +1,7 @@
-var ssh = require("shellreactions-exec").ssh_exec
-var exec = require("shellreactions-exec").exec
-var cell = require("./cell")
-
 module.exports = function(angel){
-  angel.on("cell install :mode", function(options, next){
-    cell.loadFileAsJSON(options.mode, function(err, data){
-      if(err) return next(err)
+  angel.on("cell install :mode", angel.series([
+    angel.loadCellData,
+    function(angel, next){
       var commands = [
         "mkdir -p {cwd}",
         "cd {cwd}",
@@ -13,21 +9,21 @@ module.exports = function(angel){
         "git checkout {branch}",
         "cd {cwd}; . {nvmPath}; nvm use {nodeVersion}; npm install --production"
       ]
-      if(data.remote)
-        ssh("remote", commands, data, next)
+      if(angel.cmdData.remote)
+        angel.ssh("remote", commands, next)
       else
-        exec(commands, data, next)
-    })
-  })
+        angel.exec(commands, next)
+    }
+  ]))
 
-  angel.on("cell uninstall :mode", function(options, next){
-    cell.loadFileAsJSON(options.mode, function(err, data){
-      if(err) return next(err)
+  angel.on("cell uninstall :mode", angel.series([
+    angel.loadCellData,
+    function(angel, next){
       var commands = "rm -rf {cwd}"
-      if(data.remote)
-        ssh("remote", commands, data, next)
+      if(angel.cmdData.remote)
+        angel.ssh("remote", commands, next)
       else
-        exec(commands, data, next)
-    })
-  })
+        angel.exec(commands, next)
+    }
+  ]))
 }

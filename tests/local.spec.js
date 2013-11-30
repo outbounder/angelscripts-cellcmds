@@ -30,7 +30,7 @@ describe("cellcmds", function(){
     it("status as running", function(next){
       instance.do("cell status ./cell_local.json", function(err, result){
         expect(err).toBeFalsy()
-        expect(result).toContain("running")
+        expect(result.pop()).toContain("running")
         next()
       })
     })

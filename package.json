@@ -10,13 +10,12 @@
     "url": "https://github.com/outbounder/angelscripts-cellcmds.git"
   },
   "dependencies": {
-    "shellreactions-exec": "0.0.1",
-    "underscore": "1.5.2",
-    "reactions": "0.0.8"
+    "angelabilities": "0.0.1",
+    "underscore": "1.5.2"
   },
   "devDependencies": {
     "jasmine-node": "1.11.0",
-    "organic-angel": "0.2.1",
+    "organic-angel": "0.2.2",
     "angelscripts": "0.0.1"
   },
   "license": "MIT"
