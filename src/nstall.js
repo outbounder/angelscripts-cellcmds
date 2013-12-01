@@ -15,6 +15,8 @@ module.exports = function(angel){
         angel.exec(commands, next)
     }
   ]))
+  .example("$ angel cell install ./file.json")
+  .description("installs via git clone to local or remote location")
 
   angel.on("cell uninstall :mode", angel.series([
     angel.loadCellData,
@@ -26,4 +28,6 @@ module.exports = function(angel){
         angel.exec(commands, next)
     }
   ]))
+  .example("$ angel cell uninstall ./file.json")
+  .description("Uninstalls from local or remote location")
 }

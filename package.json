@@ -15,8 +15,8 @@
   },
   "devDependencies": {
     "jasmine-node": "1.11.0",
-    "organic-angel": "0.2.2",
-    "angelscripts": "0.0.1"
+    "organic-angel": "0.2.4",
+    "angelscripts": "0.0.4"
   },
   "license": "MIT"
 }

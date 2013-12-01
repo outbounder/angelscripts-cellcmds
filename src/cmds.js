@@ -9,4 +9,11 @@ module.exports = function(angel){
         angel.exec(commands, next)
     }
   ]))
+  .example([
+    "$ angel cell start ./file.json",
+    "$ angel cell stop ./file.json",
+    "$ angel cell restart ./file.json",
+    "$ angel cell status ./file.json"
+  ].join("\n"))
+  .description("Starts, stops, restarts or returns status for nodejs process either locally or remote")
 }

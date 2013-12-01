@@ -15,4 +15,6 @@ module.exports = function(angel){
       ], next)
     }
   ]))
+  .example("$ angel cell upgrade ./file.json")
+  .description("upgrades via git clone to local or remote location and restarts on success")
 }
