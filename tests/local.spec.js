@@ -56,6 +56,13 @@ describe("cellcmds", function(){
       })
     })
 
+    it("builds", function(next){
+      instance.do("cell build ./cell_local.json", function(err, result){
+        expect(err).toBeFalsy()
+        next()
+      })
+    })
+
     it("uninstalls", function(next){
       instance.do("cell uninstall ./cell_local.json", function(err, result){
         expect(err).toBeFalsy()

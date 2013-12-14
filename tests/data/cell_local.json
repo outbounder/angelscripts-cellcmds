@@ -8,5 +8,6 @@
   "start": "node ./node_modules/.bin/angel app start app.js",
   "stop": "node ./node_modules/.bin/angel app stop app.js",
   "restart": "node ./node_modules/.bin/angel app restart app.js",
-  "status": "node ./node_modules/.bin/angel app status app.js"
+  "status": "node ./node_modules/.bin/angel app status app.js",
+  "build": "node ./scripts/build.js"
 }

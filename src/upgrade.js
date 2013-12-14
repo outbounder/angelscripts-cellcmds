@@ -11,7 +11,15 @@ module.exports = function(angel){
       ]
       angel.series([
         angel.cmdData.remote? angel.ssh("remote", commands) : angel.exec(commands),
-        angel.do("cell restart "+angel.cmdData.mode)
+        function(angel, next){
+          if(angel.cmdData.build)
+            angel.series([
+              angel.do("cell build "+angel.cmdData.mode),
+              angel.do("cell restart "+angel.cmdData.mode)    
+            ], next)
+          else
+            angel.do("cell restart "+angel.cmdData.mode, next)
+        }
       ], next)
     }
   ]))
