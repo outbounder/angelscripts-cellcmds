@@ -6,9 +6,9 @@ module.exports = function(angel){
       if(!commandValue) return next()
       var commands = angel.format("cd {cwd}; . {nvmPath}; nvm use {nodeVersion}; "+commandValue)
       if(angel.cmdData.remote)
-        angel.ssh("remote", commands, next)
+        angel.ssh("remote", commands, function(){})
       else
-        angel.exec(commands, next)
+        angel.exec(commands, function(){})
     }
   ]))
   .example([
