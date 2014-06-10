@@ -4,7 +4,7 @@
   "source": "git@github.com:outbounder/angelscripts-cellcmds-testrepo.git",
   "branch": "master",
   "nvmPath": "~/.nvm/nvm.sh",
-  "nodeVersion": "v0.10.18",
+  "nodeVersion": "v0.10.24",
   "start": "node ./node_modules/.bin/angel app start app.js",
   "stop": "node ./node_modules/.bin/angel app stop app.js",
   "restart": "node ./node_modules/.bin/angel app restart app.js",

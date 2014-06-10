@@ -4,6 +4,7 @@ var _ = require("underscore")
 module.exports = function(angel, next) {
   require("angelabilities/src/shell")(angel)
   require("angelabilities/src/reactions")(angel)
+  require("angelabilities/src/format")(angel)
 
   angel.loadCellData = function(angel, next){
     fs.readFile(angel.cmdData.mode, function(err, data){
