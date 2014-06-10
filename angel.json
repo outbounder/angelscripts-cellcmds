@@ -1,6 +1,6 @@
 {
   "scripts": [
     "angelscripts",
-    "./index"
+    "./index.js"
   ]
 }
