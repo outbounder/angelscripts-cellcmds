@@ -16,7 +16,8 @@ its process management locally or remote.
       "start": String,
       "stop": String,
       "restart": String,
-      "status": String
+      "status": String,
+      "custom": String // custom_value , optional
     }
 
 ### actions
@@ -38,8 +39,8 @@ its process management locally or remote.
 
 #### cell start/stop/status/restart
 
-    $ angel cell :mode :cmd(start|stop|status|restart)
-      -> cd {cwd}; . {nvmPath}; nvm use {nodeVersion}; {:cmd}
+    $ angel cell :cmd(start|stop|status|restart|custom) :mode 
+      -> cd {cwd}; . {nvmPath}; nvm use {nodeVersion}; {:cmd|custom_value}
 
 * `{:cmd}` has the value of configuration[start|stop|status|restart]
 
