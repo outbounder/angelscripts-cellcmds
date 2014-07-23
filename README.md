@@ -1,84 +1,98 @@
-# angelscripts cellcmds
+# angelscripts cellcmds v0.1.0
 
-## cell
-Treat any application as cell and provide support for 
-its process management locally or remote.
+Angel Scripts for local or remote cell process management
 
-### configuration.json
+## usage
+
+### 1. create `myproject/cell.json`
 
     {
-      "remote": String // optional
-      "cwd": String,
-      "source": String,
-      "branch": String,
-      "nvmPath": String,
-      "nodeVersion": "v0.x.x",
-      "start": String,
-      "stop": String,
-      "restart": String,
-      "status": String
+      "name": "myproject",
+      "remote": "ssh user@remoteAddr",
+      "sourceNode": ". ~/.nvm/nvm.sh ; nvm use v0.10.24",
+      "cwd": "~/app",
+      "main": "index.js",
+      "source": "git url",
+      "branch": "master",
+      "origin": "origin",
+      "start": "{sourceNode}; cd {cwd}; node ./node_modules/.bin/angel app start app.js",
+      "stop": "{sourceNode}; cd {cwd}; node ./node_modules/.bin/angel app stop app.js",
+      "restart": "{sourceNode}; cd {cwd}; node ./node_modules/.bin/angel app restart app.js",
+      "status": "{sourceNode}; cd {cwd}; node ./node_modules/.bin/angel app status app.js",
+      "build": "{sourceNode}; cd {cwd}; node ./scripts/build.js",
+      "install": "mkdir -p {cwd} ; cd {cwd} ; git clone {source} . ; {sourceNode} ; npm install",
+      "upgrade": "git fetch {origin} ; git checkout {branch} ; git pull {origin} {branch} ; npm install --production ; {build} ; {stop} && {start}",
+      "upgrade-without-build": "git fetch {origin} ; git checkout {branch} ; git pull {origin} {branch} ; npm install --production ; {stop} && {start}"
+      "uninstall": "rm -rf {cwd}"
     }
 
-### actions
+#### `remote` property
 
-* All actions are executed on `remote` via `ssh` when it is present, otherwise locally.
-* `:mode` is the path to configuration.json which is loaded to seed the commands.
+Once present all commands will be executed using the following pattern: `{remote} '{command}'`
 
-<br />
+#### `{placeholders}`
 
-#### cell install
+Every placeholder is replaced with its corresponding value from the same json object. This is useful when different commands need to contain same instructions or to refer to the same values.
 
-    $ angel cell install :mode
-      -> mkdir -p {cwd}
-      -> cd {cwd}
-      -> git clone {source} ./
-      -> git checkout {branch}
-      -> cd {cwd}; . {nvmPath}; nvm use {nodeVersion}; npm install --production
-<br />
+#### `start`, `stop`, ... commands
 
-#### cell start/stop/status/restart
+`cell.json` file contain both common variables and common commands. Commands can be invoked from command line using `angel cell {command}` pattern. In the example `cell.json` cell management responsibility is deffered via commands to [angelscripts-nodeapps](https://github.com/outbounder/angelscripts-nodeapps) using [organic-angel](https://github.com/outbounder/organic-angel) as script/task runner.
 
-    $ angel cell :mode :cmd(start|stop|status|restart)
-      -> cd {cwd}; . {nvmPath}; nvm use {nodeVersion}; {:cmd}
+### 2. include scripts and use `cell.json` commands
 
-* `{:cmd}` has the value of configuration[start|stop|status|restart]
+    $ cd myproject
+    $ npm install organic-angel --save
+    $ npm install angelscripts-cellcmds --save
 
-<br />
+    # only if start, stop, & etc commands from cell.json use them
+    $ npm install angelscripts-nodeapps --save 
 
-#### cell upgrade
+    $ node ./node_modules/.bin/angel cell install ./cell.json
+    $ node ./node_modules/.bin/angel cell start ./cell.json
+    $ node ./node_modules/.bin/angel cell upgrade ./cell.json
 
-    $ angel cell upgrade :mode
-      -> cd {cwd}
-      -> git fetch
-      -> git checkout {branch}
-      -> git pull {origin} {branch}
-      -> cd {cwd}; . {nvmPath}; nvm use {nodeVersion}; npm install --production
-      -> angel cell restart :mode
-<br />
+### 3. perks
 
-#### cell uninstall
+#### use just `angel` instead of `node ./node_modules/.bin/angel` on your workstation
 
-    $ angel cell uninstall :mode
-      -> rm -rf {cwd}
-<br />
+    $ npm install organic-angel -g
+    $ cd myproject
+    $ angel app ... 
 
-## pre-requirements
+#### install `angelscripts-help` to showcase available commands
 
-* git
-* ssh
-* nvm*
-* npm*
+    $ cd myproject
+    $ npm install angelscripts-help --save-dev
+    $ angel help
+
+#### use `forever` or `pm2` instead of `angelscripts-nodeapps` for production cells
+
+* Install `forever` or `pm2` on remote hosts *
+
+#### `cell.json` with [forever](https://github.com/nodejitsu/forever)
+
+    {
+      ...
+      "start": "forever --sourceDir {cwd} -a -l {cwd}/{main}.out --minUptime 5000 --spinSleepTime 2000 start {main}",
+      "stop": "forever stop {main}",
+      "restart": "forever restart {main}",
+      ...
+    }
+
+#### `cell.json` with [pm2](https://github.com/Unitech/pm2)
+
+    {
+      ...
+      "start": "pm2 start {main} --name {name}",
+      "stop": "pm2 stop {name}",
+      "restart": "pm2 restart {name}"
+      ...
+    }
 
 # Thanks to
 
 ## organic-angel
 https://github.com/outbounder/organic-angel
-
-## shellreactions-exec
-https://github.com/outbounder/shellreactions-exec
-
-## reactions
-https://github.com/vbogdanov/reactions
 
 ## jasmine-node
 https://github.com/mhevery/jasmine-node

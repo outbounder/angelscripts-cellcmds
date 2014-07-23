@@ -21,5 +21,14 @@
   "peerDependencies": {
     "organic-angel": "0.2.10"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "description": "Angel Scripts for local or remote cell process management",
+  "bugs": {
+    "url": "https://github.com/outbounder/angelscripts-cellcmds/issues"
+  },
+  "homepage": "https://github.com/outbounder/angelscripts-cellcmds",
+  "directories": {
+    "test": "tests"
+  },
+  "author": "Boris Filipov"
 }
