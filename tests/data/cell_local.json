@@ -1,13 +1,14 @@
 {
-  "cwd": "~/test_app",
+  "cwd": "~/tmp/test-app",
   "main": "app.js",
   "source": "git@github.com:outbounder/angelscripts-cellcmds-testrepo.git",
   "branch": "master",
-  "nvmPath": "~/.nvm/nvm.sh",
-  "nodeVersion": "v0.10.24",
-  "start": "node ./node_modules/.bin/angel app start app.js",
-  "stop": "node ./node_modules/.bin/angel app stop app.js",
-  "restart": "node ./node_modules/.bin/angel app restart app.js",
-  "status": "node ./node_modules/.bin/angel app status app.js",
-  "build": "node ./scripts/build.js"
+  "start": "cd {cwd}; node ./node_modules/.bin/angel app start app.js",
+  "stop": "cd {cwd}; node ./node_modules/.bin/angel app stop app.js",
+  "restart": "cd {cwd}; node ./node_modules/.bin/angel app restart app.js",
+  "status": "cd {cwd}; node ./node_modules/.bin/angel app status app.js",
+  "build": "cd {cwd}; node ./scripts/build.js",
+  "install": "mkdir -p {cwd}; cd {cwd}; git clone {source} .; npm install;",
+  "upgrade": "cd {cwd}; git pull origin {branch}; {restart}",
+  "uninstall": "rm -rf {cwd}"
 }

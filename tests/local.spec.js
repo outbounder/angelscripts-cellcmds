@@ -6,7 +6,7 @@ describe("cellcmds", function(){
 
   beforeEach(function(next){
     instance = new Angel({
-      scripts: [__dirname+"/../index"]
+      scripts: [__dirname+"/../index.js"]
     })
     instance.plasma.on("ready", function(){next()})
     process.chdir(__dirname+"/data")
