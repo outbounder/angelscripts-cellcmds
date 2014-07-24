@@ -1,6 +1,6 @@
 {
   "name": "angelscripts-cellcmds",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "index.js",
   "scripts": {
     "test": "jasmine-node ./tests/"
@@ -19,7 +19,7 @@
     "angelscripts": "0.0.4"
   },
   "peerDependencies": {
-    "organic-angel": "0.2.10"
+    "organic-angel": "0.2.x"
   },
   "license": "MIT",
   "description": "Angel Scripts for local or remote cell process management",
