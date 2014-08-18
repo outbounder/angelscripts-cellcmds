@@ -32,18 +32,14 @@ module.exports = function(angel) {
         commandValue = angel.cmdData.remote+" '"+commandValue+"'"
       }
       if(!angel.cmdData.silent) {
-        console.info("exec", commandValue)
+        console.info("[", target, "| EXEC ]", commandValue)
       }
       
       var child = exec(commandValue)
       var outputBuffer = [];
       if(!angel.cmdData.silent) {
-        child.stdout.on("data", function(chunk){
-          process.stdout.write(target+" "+chunk.toString())
-        })
-        child.stderr.on("data", function(chunk){
-          process.stderr.write(target+" "+chunk.toString())
-        })
+        child.stdout.pipe(process.stdout)
+        child.stderr.pipe(process.stderr)
       }
       if(next) {
         child.stdout.on("data", function(chunk){
@@ -52,10 +48,14 @@ module.exports = function(angel) {
       }
       child.on("close", function(code){
         if(code != 0) {
-          console.error("failed", commandValue)
+          if(!angel.cmdData.silent)
+            console.error("[", target, "| FAILED ]", angel.cmdData.cmd)
           return next && next(new Error(code+" : "+commandValue))
-        } else
+        } else {
+          if(!angel.cmdData.silent)
+            console.info("[", target, "| SUCCESS ]", angel.cmdData.cmd)
           next && next(null, outputBuffer)
+        }
       })
     })
   })

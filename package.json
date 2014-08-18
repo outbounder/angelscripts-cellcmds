@@ -14,9 +14,12 @@
     "underscore": "1.5.2"
   },
   "devDependencies": {
+    "angelabilities-grunt": "0.0.1",
+    "angelscripts": "0.0.4",
+    "grunt": "^0.4.5",
+    "grunt-git-release": "^0.1.3",
     "jasmine-node": "1.11.0",
-    "organic-angel": "0.2.10",
-    "angelscripts": "0.0.4"
+    "organic-angel": "0.2.10"
   },
   "peerDependencies": {
     "organic-angel": "0.2.x"
