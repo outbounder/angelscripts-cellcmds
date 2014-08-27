@@ -54,7 +54,7 @@ module.exports = function(angel) {
         } else {
           if(!angel.cmdData.silent)
             console.info("[", target, "| SUCCESS ]", angel.cmdData.cmd)
-          next && next(null, outputBuffer)
+          next && next(null, null, outputBuffer)
         }
       })
     })

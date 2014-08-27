@@ -19,10 +19,10 @@
     "grunt": "^0.4.5",
     "grunt-git-release": "^0.1.3",
     "jasmine-node": "1.11.0",
-    "organic-angel": "0.2.10"
+    "organic-angel": "0.2.13"
   },
   "peerDependencies": {
-    "organic-angel": "0.2.x"
+    "organic-angel": "~0.2.x"
   },
   "license": "MIT",
   "description": "Angel Scripts for local or remote cell process management",

@@ -28,9 +28,9 @@ describe("cellcmds", function(){
     })
 
     it("status as running", function(next){
-      instance.do("cell status ./cell_local.json", function(err, result){
+      instance.do("cell status ./cell_local.json", function(err, result, output){
         expect(err).toBeFalsy()
-        expect(result.pop()).toContain("running")
+        expect(output.pop()).toContain("running")
         next()
       })
     })
