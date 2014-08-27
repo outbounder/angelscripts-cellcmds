@@ -19,7 +19,7 @@
     "grunt": "^0.4.5",
     "grunt-git-release": "^0.1.3",
     "jasmine-node": "1.11.0",
-    "organic-angel": "0.2.13"
+    "organic-angel": "0.2.14"
   },
   "peerDependencies": {
     "organic-angel": "~0.2.x"
