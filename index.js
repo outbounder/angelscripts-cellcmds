@@ -1,43 +1,39 @@
 var fs = require('fs')
-var _ = require("underscore")
 var exec = require("child_process").exec
+var format = require('string-format')
 
 module.exports = function(angel) {
-  require("angelabilities/src/format")(angel)
-
-  angel.on("cell :cmd :mode", function(angel, next) {
+  angel.on("cell :cmd :cellDataPath", function(angel, next) {
     // load cell data
-    fs.readFile(angel.cmdData.mode, function(err, data){
-      
+    fs.readFile(angel.cmdData.cellDataPath, function(err, data){
       if(err) return next(err)
       try {
         data = JSON.parse(data.toString())
-        _.extend(angel.cmdData, data)
       } catch(err){
         console.error(err)
         return next && next(err)
       }
-      
-      var commandValue = angel.cmdData[angel.cmdData.cmd]
+
+      var commandValue = data[angel.cmdData.cmd]
       if(!commandValue) {
-        console.error(angel.cmdData.cmd, "not found in", angel.cmdData.mode, "as command")
+        console.error(angel.cmdData.cmd, "not found in", angel.cmdData.cellDataPath, "as command")
         return next(new Error(angel.cmdData.cmd+" not found"))
       }
       while(commandValue.indexOf("{") !== -1) {
-        commandValue = angel.format(commandValue)
+        commandValue = format(commandValue, data)
       }
       var target = "localhost"
-      if(angel.cmdData.remote) {
-        target = angel.cmdData.remote
-        commandValue = angel.cmdData.remote+" '"+commandValue+"'"
+      if(data.remote) {
+        target = data.remote
+        commandValue = data.remote+" '"+commandValue+"'"
       }
-      if(!angel.cmdData.silent) {
-        console.info("exec", commandValue)
+      if(!data.silent) {
+        console.info("exec at", target, "->", commandValue)
       }
-      
+
       var child = exec(commandValue)
       var outputBuffer = [];
-      if(!angel.cmdData.silent) {
+      if(!data.silent) {
         child.stdout.on("data", function(chunk){
           process.stdout.write(target+" "+chunk.toString())
         })
@@ -45,17 +41,14 @@ module.exports = function(angel) {
           process.stderr.write(target+" "+chunk.toString())
         })
       }
-      if(next) {
-        child.stdout.on("data", function(chunk){
-          outputBuffer.push(chunk.toString())
-        })
-      }
       child.on("close", function(code){
         if(code != 0) {
-          console.error("failed", commandValue)
+          console.error("failed", target, commandValue)
           return next && next(new Error(code+" : "+commandValue))
-        } else
-          next && next(null, outputBuffer)
+        } else {
+          console.info("success at", target, "->", commandValue)
+          next && next()
+        }
       })
     })
   })

@@ -5,59 +5,55 @@ describe("cellcmds", function(){
   var instance
 
   beforeEach(function(next){
-    instance = new Angel({
-      scripts: [__dirname+"/../index.js"]
-    })
-    instance.plasma.on("ready", function(){next()})
-    process.chdir(__dirname+"/data")
+    instance = new Angel()
+    instance.scripts.loadScript(__dirname+'/../index.js', next)
   })
 
   describe("remote cells", function(){
     it("installs", function(next){
-      instance.do("cell install ./cell_remote.json", function(err, result){
+      instance.do("cell install ./tests/data/cell_remote.json", function(err, result){
         expect(err).toBeFalsy()
         next()
       })
     })
 
     it("starts", function(next){
-      instance.do("cell start ./cell_remote.json", function(err, result){
+      instance.do("cell start ./tests/data/cell_remote.json", function(err, result){
         expect(err).toBeFalsy()
         next()
       })
     })
 
     it("status as running", function(next){
-      instance.do("cell status ./cell_remote.json", function(err, result){
+      instance.do("cell status ./tests/data/cell_remote.json", function(err, result){
         expect(err).toBeFalsy()
-        expect(result.pop()).toContain("running")
         next()
       })
     })
 
     it("restarts", function(next){
-      instance.do("cell restart ./cell_remote.json", function(err, result){
+      instance.do("cell restart ./tests/data/cell_remote.json", function(err, result){
         expect(err).toBeFalsy()
         next()
       })
     })
 
     it("upgrades", function(next){
-      instance.do("cell upgrade ./cell_remote.json", function(err, result){
+      instance.do("cell upgrade ./tests/data/cell_remote.json", function(err, result){
         expect(err).toBeFalsy()
         next()
       })
     })
 
     it("stops", function(next){
-      instance.do("cell stop ./cell_remote.json", function(err, result){
+      instance.do("cell stop ./tests/data/cell_remote.json", function(err, result){
         expect(err).toBeFalsy()
         next()
       })
     })
 
     it("uninstalls", function(next){
-      instance.do("cell uninstall ./cell_remote.json", function(err, result){
+      instance.do("cell uninstall ./tests/data/cell_remote.json", function(err, result){
         expect(err).toBeFalsy()
         next()
       })

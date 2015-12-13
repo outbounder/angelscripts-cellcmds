@@ -1,4 +1,4 @@
-# angelscripts cellcmds v0.1.x
+# angelscripts cellcmds v0.2.0
 
 Angel Scripts for local or remote cell process management
 
@@ -44,26 +44,13 @@ Every placeholder is replaced with its corresponding value from the same json ob
     $ npm install organic-angel --save
     $ npm install angelscripts-cellcmds --save
 
-    # only if start, stop, & etc commands from cell.json use them
-    $ npm install angelscripts-nodeapps --save 
+    # provide ./cell.json data & commands
 
     $ node ./node_modules/.bin/angel cell install ./cell.json
     $ node ./node_modules/.bin/angel cell start ./cell.json
     $ node ./node_modules/.bin/angel cell upgrade ./cell.json
 
-### 3. perks
-
-#### use just `angel` instead of `node ./node_modules/.bin/angel` on your workstation
-
-    $ npm install organic-angel -g
-    $ cd myproject
-    $ angel app ... 
-
-#### install `angelscripts-help` to showcase available commands
-
-    $ cd myproject
-    $ npm install angelscripts-help --save-dev
-    $ angel help
+### 3. production
 
 #### use `forever` or `pm2` instead of `angelscripts-nodeapps` for production cells
 
@@ -88,11 +75,3 @@ Every placeholder is replaced with its corresponding value from the same json ob
       "restart": "pm2 restart {name}"
       ...
     }
-
-# Thanks to
-
-## organic-angel
-https://github.com/outbounder/organic-angel
-
-## jasmine-node
-https://github.com/mhevery/jasmine-node

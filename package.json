@@ -1,6 +1,6 @@
 {
   "name": "angelscripts-cellcmds",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "main": "index.js",
   "scripts": {
     "test": "jasmine-node ./tests/"
@@ -10,16 +10,14 @@
     "url": "https://github.com/outbounder/angelscripts-cellcmds.git"
   },
   "dependencies": {
-    "angelabilities": "0.0.3",
-    "underscore": "1.5.2"
+    "string-format": "^0.5.0"
   },
   "devDependencies": {
     "jasmine-node": "1.11.0",
-    "organic-angel": "0.2.10",
-    "angelscripts": "0.0.4"
+    "organic-angel": "0.3.0"
   },
   "peerDependencies": {
-    "organic-angel": "0.2.x"
+    "organic-angel": "0.3.x"
   },
   "license": "MIT",
   "description": "Angel Scripts for local or remote cell process management",
