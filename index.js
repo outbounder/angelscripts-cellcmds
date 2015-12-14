@@ -28,7 +28,7 @@ module.exports = function(angel) {
         commandValue = data.remote+" '"+commandValue+"'"
       }
       if(!data.silent) {
-        console.info("exec at", target, "->", commandValue)
+        console.info("exec", target, "->", commandValue, '\n')
       }
 
       var child = exec(commandValue)
@@ -41,15 +41,18 @@ module.exports = function(angel) {
           process.stderr.write(target+" "+chunk.toString())
         })
       }
-      child.on("close", function(code){
+      child.on("exit", function(code){
+        process.stdin.unpipe(child.stdin)
+        process.stdin.end()
         if(code != 0) {
-          console.error("failed", target, commandValue)
+          console.error("failed", target)
           return next && next(new Error(code+" : "+commandValue))
         } else {
-          console.info("success at", target, "->", commandValue)
+          console.info("success", target)
           next && next()
         }
       })
+      process.stdin.resume()
       process.stdin.pipe(child.stdin)
     })
   })

@@ -1,4 +1,4 @@
-# angelscripts cellcmds v0.2.0
+# angelscripts cellcmds v0.2.2
 
 Angel Scripts for local or remote cell process management
 
