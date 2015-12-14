@@ -50,6 +50,7 @@ module.exports = function(angel) {
           next && next()
         }
       })
+      process.stdin.pipe(child.stdin)
     })
   })
   .example([
