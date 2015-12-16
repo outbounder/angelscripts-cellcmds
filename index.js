@@ -28,27 +28,22 @@ module.exports = function(angel) {
         commandValue = data.remote+" '"+commandValue+"'"
       }
       if(!data.silent) {
-        console.info("exec", target, "->", commandValue, '\n')
+        console.info("EXEC", target, "->", commandValue, '\n')
       }
 
       var child = exec(commandValue)
-      var outputBuffer = [];
       if(!data.silent) {
-        child.stdout.on("data", function(chunk){
-          process.stdout.write(target+" "+chunk.toString())
-        })
-        child.stderr.on("data", function(chunk){
-          process.stderr.write(target+" "+chunk.toString())
-        })
+        child.stdout.pipe(process.stdout)
+        child.stderr.pipe(process.stderr)
       }
       child.on("exit", function(code){
         process.stdin.unpipe(child.stdin)
         process.stdin.end()
         if(code != 0) {
-          console.error("failed", target)
+          console.error("FAIL", target)
           return next && next(new Error(code+" : "+commandValue))
         } else {
-          console.info("success", target)
+          console.info("SUCCESS", target)
           next && next()
         }
       })
