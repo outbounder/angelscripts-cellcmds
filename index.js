@@ -1,18 +1,28 @@
 var fs = require('fs')
 var exec = require("child_process").exec
 var format = require('string-format')
+var loadDna = require('organic-dna-loader')
+var _ = require('lodash')
 
 module.exports = function(angel) {
   angel.on("cell :cmd :cellDataPath", function(angel, next) {
     // load cell data
-    fs.readFile(angel.cmdData.cellDataPath, function(err, data){
+    loadDna(function(err, dna){
       if(err) return next(err)
+      var cellDataBranchPath
+      if (angel.cmdData.cellDataPath.indexOf('.json') !== -1) {
+        cellDataBranchPath = angel.cmdData.cellDataPath.replace('./dna/', '').replace('.json', '').replace('/', '.')
+      } else {
+        cellDataBranchPath = angel.cmdData.cellDataPath
+      }
       try {
-        data = JSON.parse(data.toString())
+        data = _.get(dna, cellDataBranchPath)
       } catch(err){
         console.error(err)
         return next && next(err)
       }
+
+      if (!data) return next(new Error('cellData not found at ' + cellDataBranchPath))
 
       var commandValue = data[angel.cmdData.cmd]
       if(!commandValue) {

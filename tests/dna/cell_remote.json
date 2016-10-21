@@ -1,0 +1,6 @@
+{
+  "remote": "ssh node@176.58.101.229",
+  "variable": "OK",
+  "referenceValue": "@common.value",
+  "echo": "echo {variable} {referenceValue}"
+}

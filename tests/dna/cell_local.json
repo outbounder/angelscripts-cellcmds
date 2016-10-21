@@ -1,0 +1,5 @@
+{
+  "variable": "OK",
+  "referenceValue": "@common.value",
+  "echo": "echo {variable} {referenceValue}"
+}

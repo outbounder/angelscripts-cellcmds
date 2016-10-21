@@ -1,6 +1,6 @@
 {
   "name": "angelscripts-cellcmds",
-  "version": "0.2.3",
+  "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "jasmine-node ./tests/"
@@ -10,11 +10,13 @@
     "url": "https://github.com/outbounder/angelscripts-cellcmds.git"
   },
   "dependencies": {
+    "lodash": "^4.16.4",
+    "organic-dna-loader": "^1.0.0",
     "string-format": "^0.5.0"
   },
   "devDependencies": {
     "jasmine-node": "1.11.0",
-    "organic-angel": "0.3.0"
+    "organic-angel": "0.3.x"
   },
   "peerDependencies": {
     "organic-angel": "0.3.x"
