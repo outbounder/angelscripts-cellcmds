@@ -1,6 +1,5 @@
 var fs = require('fs')
 var exec = require("child_process").exec
-var format = require('string-format')
 var loadDna = require('organic-dna-loader')
 var _ = require('lodash')
 
@@ -29,9 +28,7 @@ module.exports = function(angel) {
         console.error(angel.cmdData.cmd, "not found in", angel.cmdData.cellDataPath, "as command")
         return next(new Error(angel.cmdData.cmd+" not found"))
       }
-      while(commandValue.indexOf("{") !== -1) {
-        commandValue = format(commandValue, data)
-      }
+
       var target = "localhost"
       if(data.remote) {
         target = data.remote
