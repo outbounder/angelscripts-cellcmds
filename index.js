@@ -29,6 +29,10 @@ module.exports = function(angel) {
         return next(new Error(angel.cmdData.cmd+" not found"))
       }
 
+      if (Array.isArray(commandValue)) {
+        commandValue = commandValue.join(' && ')
+      }
+
       var target = "localhost"
       if(data.remote) {
         target = data.remote

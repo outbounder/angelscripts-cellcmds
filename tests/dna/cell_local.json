@@ -1,5 +1,8 @@
 {
   "variable": "OK",
-  "referenceValue": "@common.value",
-  "echo": "echo {variable} {referenceValue}"
+  "echo": "echo &{variable} @{common.value}",
+  "echo-many": [
+    "echo &{variable}",
+    "echo @{common.value}"
+  ]
 }

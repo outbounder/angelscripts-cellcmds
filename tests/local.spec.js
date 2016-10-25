@@ -32,5 +32,11 @@ describe("cellcmds", function(){
         next()
       })
     })
+    it("command array", function(next){
+      instance.do("cell echo-many ./dna/cell_local.json", function(err, result){
+        expect(err).toBeFalsy()
+        next()
+      })
+    })
   })
 })

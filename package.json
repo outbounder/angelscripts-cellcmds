@@ -1,6 +1,6 @@
 {
   "name": "angelscripts-cellcmds",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "index.js",
   "scripts": {
     "test": "jasmine-node ./tests/"
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "lodash": "^4.16.4",
-    "organic-dna-loader": "^1.1.0"
+    "organic-dna-loader": "^1.2.0"
   },
   "devDependencies": {
     "jasmine-node": "1.11.0",
